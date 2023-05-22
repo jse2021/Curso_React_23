@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- babel hace la traduccion de un codigo moderno a un codigo que sea soportado por cualquier navegador web -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <!-- Cargat React -->
+       <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+       <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>ReactApp</title>
+</head>
+<body>
+
+    <div id="root"></div>
+        <script type="text/babel">
+            const nombre = "Jose"
+            const divRoot = document.querySelector('#root');
+            const h1tag = <h1>Hola, soy {nombre}</h1>
+            ReactDOM.render(h1tag,divRoot);
+        </script>
+</body>
+</html>
