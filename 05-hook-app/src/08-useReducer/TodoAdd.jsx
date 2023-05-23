@@ -3,10 +3,11 @@ import useForm from '../hooks/useForm';
 
 export const TodoAdd = ({onNewTodo}) => {
 
-    const {description, onInputChange, onResetForm} = useForm({
+    const {description,  onInputChange,onResetForm} = useForm({
         description : '',
     });
 
+    // esta funcion onFormSubmit trabaja el enter del input
     const onFormSubmit = (event) => {
         event.preventDefault();
         if(description.length <= 1) return;
@@ -15,10 +16,11 @@ export const TodoAdd = ({onNewTodo}) => {
             id:new Date().getTime(),
             done: false,
             description: description,
-        }
+        }  
         onNewTodo(onNewTodo);
+        // para que se borre el contenido de la caja de texto
         onResetForm();
-    }
+    };
 
 
     return (
@@ -31,9 +33,9 @@ export const TodoAdd = ({onNewTodo}) => {
             value={description}
             onChange={onInputChange}
         /> 
-        <button type='submit'
+        <button 
+        type='submit'
         className='btn btn-outline-dark mt-2'
-
         >Agregar</button>
     </form>
     );
