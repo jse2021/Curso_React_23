@@ -9,7 +9,7 @@ export const TodoApp = () => {
 const {todos,todosCount,pendingTodosCount,handleNewTodo,handleDeletedTodo,handleToggleTodo} = useTodos();
     return (
             <>
-                <h1>TodoAPP/ {todosCount} <small>Pendientes: {pendingTodosCount}</small></h1>
+                <h1>TodoAPP: {todosCount}, <small>Pendientes: {pendingTodosCount}</small></h1>
                 <hr />
                 <div className='row'>
                     <div className='col-7'>

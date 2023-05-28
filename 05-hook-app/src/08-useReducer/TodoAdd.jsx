@@ -1,4 +1,3 @@
-import React from 'react';
 import useForm from '../hooks/useForm';
 
 export const TodoAdd = ({onNewTodo}) => {
@@ -10,6 +9,7 @@ export const TodoAdd = ({onNewTodo}) => {
     // esta funcion onFormSubmit trabaja el enter del input
     const onFormSubmit = (event) => {
         event.preventDefault();
+
         if(description.length <= 1) return;
         
         const newTodo = {
@@ -17,7 +17,7 @@ export const TodoAdd = ({onNewTodo}) => {
             done: false,
             description: description,
         }  
-        onNewTodo(onNewTodo);
+        onNewTodo(newTodo);
         // para que se borre el contenido de la caja de texto
         onResetForm();
     };
