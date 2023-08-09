@@ -4,10 +4,11 @@ import {CalendarPage} from '../calendar/pages/CalendarPage';
 
 
 
+
 const AppRouter = () => {
 
-    const authStatus = 'authenticated';
-
+    const authStatus = 'not-authenticated';
+ 
 
     return (
         
