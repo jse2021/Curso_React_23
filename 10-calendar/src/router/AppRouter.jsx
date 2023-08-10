@@ -1,25 +1,47 @@
 import {Navigate, Route, Routes} from 'react-router-dom';
 import { LoginPage} from "../auth";
 import {CalendarPage} from '../calendar/pages/CalendarPage';
+import { useAuthStore } from '../store/hook/useAuthStore';
+import { useEffect } from 'react';
 
 
 
 
 const AppRouter = () => {
 
-    const authStatus = 'not-authenticated';
- 
+    // const authStatus = 'not-authenticated';
+    const {status,checkAuthToken} = useAuthStore();
+
+    useEffect(()=>{
+        checkAuthToken();
+    },[])
+
+
+    if (status === 'checking') {
+        return (
+            <h3>Cargando..</h3>
+        )
+        
+    }
 
     return (
         
         <Routes>
-        {
-            (authStatus === 'not-authenticated')
-            ? <Route path='/auth/*' element={ <LoginPage/>}/>
-            : // cualquier ruta que no sea la anterior
-            <Route path='/*' element={ <CalendarPage/>}/>
-        }
-        <Route path='/*' element={ <Navigate to = "/auth/login"></Navigate>}/>
+            {
+                (status === 'not-authenticated')
+                ? (
+                    <>
+                        <Route path='/auth/*' element={ <LoginPage/>}/>
+                        <Route path='/*' element={ <Navigate to = "/auth/login"/>}/>
+                    </>
+                ) 
+                : (
+                    <>
+                        <Route path='/' element={ <CalendarPage/>}/>
+                        <Route path='/*' element={ <Navigate to = "/"></Navigate>}/>
+                    </>
+                )
+            }
         </Routes>
     );
 };
