@@ -24,6 +24,12 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
 
+//*SI LOS ENLANCES ANTERIORES NO RESPONDENM PASA POR LE INDEX QUE TIENE LA CONFIGURACION DE REACT
+app.get('*', (req, res)=> {
+    res.sendFile(__dirname + '/public/index.html');
+})
+
+
 
 // TODO: auth , crear, login, renew
 // TODO: Crud: Eventos
