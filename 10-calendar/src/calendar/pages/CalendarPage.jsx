@@ -11,13 +11,16 @@ import { useUiStore } from '../../store/hook/useUiStore';
 import {useCalendarStore} from '../../store/hook/useCalendarStore';
 import FabAddNew from '../components/FabAddNew';
 import { FabDelete } from '../components/FabDelete';
+import { useEffect } from 'react';
+import { useAuthStore } from '../../store/hook/useAuthStore';
 
  
 
 export const CalendarPage = () => {
 
+    const {user} = useAuthStore();
     const {openDatemodal} = useUiStore();//para abrir o cerrar el modal
-    const {events,setActiveEvent} = useCalendarStore();
+    const {events,setActiveEvent, startLoadingEvents} = useCalendarStore();
     // PARA ALMACENAR LA VISTA EN EL STORAGE
     const [lastView, setLastView]= useState(localStorage.getItem('lastView')||'week')
 
@@ -25,9 +28,13 @@ export const CalendarPage = () => {
      * DISEÑO DE LOS EVENTOS, "BOTON"
      */
     const eventStyleGetter = (event, start, end,isSelected) =>{
+
+        //*Verifico que el evento sea el que creo el usuario
+        const isMyEvent = (user.uid === event.user._id) || (user.uid === event.user.uid);
+
         console.log({event, start, end,isSelected})
         const style = {
-            backgroundColor: '#347cf7',
+            backgroundColor: isMyEvent? '#347cf7': '#465660',
             borderRadius: '5px',
             opacity:0.8,
             color: 'white'
@@ -57,6 +64,10 @@ export const CalendarPage = () => {
         localStorage.setItem('lastView',event);
     
     }
+
+    useEffect(()=>{
+        startLoadingEvents();
+    },[])
 
     return (
         <>

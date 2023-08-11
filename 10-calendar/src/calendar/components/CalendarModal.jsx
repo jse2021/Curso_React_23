@@ -110,7 +110,7 @@ const onSubmit = async (event) => {
     }
     if (formValues.title.length <= 0) return;
     console.log(formValues);
-    await startSavingEvent(formValues);
+    await startSavingEvent(formValues);//Mandamos toda la informacion del formulario,
     closeDatemodal();
     setFormSubmitted(false);
 }
